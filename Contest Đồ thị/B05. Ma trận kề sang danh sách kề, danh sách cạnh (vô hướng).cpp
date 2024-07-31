@@ -1,0 +1,56 @@
+#include <bits/stdc++.h>
+#define ll long long
+
+using namespace std;
+
+vector<int> ke[1000];
+vector<pair<int, int>> canh;
+int arr[10000][10000];
+
+bool cmp(pair<int, int> a, pair<int, int> b)
+{
+    if(a.second == b.second) return a.first < b.first;
+    else return a.second < b.second;
+}
+main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    
+    int n;
+    cin >> n;
+    for(int i = 1; i <= n; i++)
+    {
+        for(int j = 1; j <= n; j++)
+        {
+            cin >> arr[i][j];
+
+            if(arr[i][j])
+            {
+                ke[i].push_back(j);
+
+                if(i < j)
+                {
+                    canh.push_back({i, j});
+                }
+            }
+        }
+    }
+
+    sort(canh.begin(), canh.end(), cmp);
+    for(auto it : canh)
+    {
+        cout << it.second << " " << it.first << endl;
+    }
+    cout << endl;
+    
+    for(int i = 1; i <= n; i++)
+    {
+        sort(ke[i].begin(), ke[i].end());
+        cout << i << " : ";
+        for(auto it : ke[i])
+            cout << it << " ";
+        cout << endl;
+    }
+}
